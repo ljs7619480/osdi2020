@@ -12,7 +12,7 @@ int main()
     get_board_info();
     // asm volatile ("mrs %0, CurrentEL" : "=r" (el));
     // printf("Current EL is: %u\n", (el>>2)&3);
-
+    INTE_REG-> ENABLE_IRQS_2 |= (1<<25);
     run_shell();
     return -1;
 }

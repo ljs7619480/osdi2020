@@ -43,6 +43,7 @@ void uart_init()
     UART_REG-> CR |= (UART_CR_TXE | UART_CR_RXE);
     UART_REG-> CR |= UART_CR_UARTEN;
     UART_REG-> ICR = 0x7F2;
+    UART_REG-> IMSC |= UART_IMSC_RXIM | UART_IMSC_TXIM;
 }
 
 /**

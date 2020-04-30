@@ -66,12 +66,16 @@ unsigned int core_cnt = 0;
 unsigned int local_cnt = 0;
 void irq_router(){
     // readirq source
-    unsigned int src = *CORE0_IRQ_SRC;
-    if (src & (1<<1)){
+    unsigned int src1 = INTE_REG-> IRQ_PENDING_2;
+    unsigned int src2 = *CORE0_IRQ_SRC;
+    // if (src1 & INTE_PENDING_1_UART_INT){
+    //     printf("uart");
+    // } else 
+    if (src2 & (1<<1)){
         core_timer_handler();
         printf("\nCore timer interrupt, jiffies %d", core_cnt++);
         core_cnt ++;
-    } else if (src & (1<<11)){
+    } else if (src2 & (1<<11)){
         local_timer_handler();
         printf("\nLocal timer interrupt, jiffies %d", local_cnt++);
         local_cnt ++;
