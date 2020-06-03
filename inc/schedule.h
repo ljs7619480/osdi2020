@@ -27,12 +27,28 @@ struct cpu_context {
     unsigned long sp;
 };
 
+struct user_page {
+    unsigned long pa;//physical address
+    unsigned long va;//virtual address
+};
+
+#define MAX_PROCESS_PAGES			16
+
+struct mm_struct {
+    unsigned long pgd;//ttbr0_el1
+    int user_pages_count;
+    struct user_page user_pages[MAX_PROCESS_PAGES];
+};
+
 struct task_struct {
     struct cpu_context cpu_context;
     long schedule_flag;
     long task_id;
     long state;
     long counter;
+    // long priority;
+    // long preempt_count;
+    struct mm_struct mm;
 };
 
 long privilege_task_create(void(*func)());
